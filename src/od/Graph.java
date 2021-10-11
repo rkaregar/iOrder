@@ -1,3 +1,5 @@
+// This is the auxiliary class for graphs.
+
 package od;
 
 import java.io.FileWriter;

@@ -1,3 +1,5 @@
+// This is the main class responsible for reading the config file and the initial setup.
+
 package od;
 
 import od.metanome.ORDERLhsRhs;

@@ -1,3 +1,5 @@
+// This is the auxiliary class for updated graph structure.
+
 package od;
 
 import java.util.*;

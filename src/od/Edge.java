@@ -1,3 +1,5 @@
+// This is the auxiliary class for edge.
+
 package od;
 
 public class Edge {

@@ -1,3 +1,5 @@
+// This is the SAT reduction class.
+
 package od;
 
 import org.sat4j.core.VecInt;

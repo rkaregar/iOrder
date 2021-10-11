@@ -1,3 +1,5 @@
+// This is the class for validating I/I OC candidates.
+
 package od;
 
 import it.unimi.dsi.fastutil.longs.LongBigArrayBigList;

@@ -1,3 +1,5 @@
+// These are the auxiliary classes for the SAT reduction.
+
 package od;
 
 import java.util.*;

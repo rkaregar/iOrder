@@ -1,3 +1,5 @@
+// This is the auxiliary class for weighetd nodes.
+
 package od;
 
 public class WeightedNode implements Comparable{

@@ -1,3 +1,5 @@
+// This is the class for validating E/I OCs.
+
 package od;
 
 import it.unimi.dsi.fastutil.longs.LongBigArrayBigList;

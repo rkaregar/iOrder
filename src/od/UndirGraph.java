@@ -1,3 +1,5 @@
+// This is the auxiliary class for undirected graph.
+
 package od;
 
 // A Java Program to detect cycle in an undirected graph

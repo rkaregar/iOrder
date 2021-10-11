@@ -1,3 +1,5 @@
+// This is the backbone of the OD discovery process for traversing the lattice and pruning it.
+
 package od;
 
 import de.metanome.algorithm_integration.AlgorithmExecutionException;

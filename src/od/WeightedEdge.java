@@ -1,3 +1,5 @@
+// This is the auxiliary class for weighetd edges.
+
 package od;
 
 import java.io.Serializable;

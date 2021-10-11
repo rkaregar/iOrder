@@ -1,3 +1,5 @@
+// This is the helper class for discovering FDs in the stripped partitions.
+
 package od;
 
 import it.unimi.dsi.fastutil.longs.LongBigArrayBigList;

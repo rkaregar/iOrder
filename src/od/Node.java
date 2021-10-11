@@ -1,3 +1,5 @@
+// This is the auxiliary class for nodes.
+
 package od;
 import java.util.ArrayList;
 import java.util.List;

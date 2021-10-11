@@ -1,3 +1,5 @@
+// This is a helper class for validating FD candidates.
+
 package od;
 
 import de.metanome.algorithm_integration.AlgorithmExecutionException;

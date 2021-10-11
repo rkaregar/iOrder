@@ -1,3 +1,5 @@
+// This is a helper class for candidate verification.
+
 package od;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
