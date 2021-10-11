@@ -1,0 +1,16 @@
+<dataset_name>
+FastOD
+<num_of_rows>
+<num_of_attributes>
+<num_of_runs>
+,
+PruneTrue
+InterestingnessPruneTrueF
+<interestingness_threshold>
+<top_k>
+BidirectionalTrueF
+RankDoubleTrue
+ReverseRankingTrueF
+BidirectionalPruneTrueF
+<reverse_ranking_percentage>
+OnlyConditionalIIOCFalse
