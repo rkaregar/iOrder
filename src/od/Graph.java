@@ -1,4 +1,4 @@
-// This is the auxiliary class for graphs.
+// This is the auxiliary class for graphs used for validating E/I candidates.
 
 package od;
 

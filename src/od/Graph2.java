@@ -1,4 +1,5 @@
-// This is the auxiliary class for updated graph structure.
+// This is the auxiliary class for the alternative graph structure, 
+// based on adjacency lists and used for validating I/I candidates.
 
 package od;
 

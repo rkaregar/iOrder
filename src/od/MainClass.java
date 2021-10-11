@@ -149,6 +149,7 @@ public class MainClass {
         System.out.println("BidirectionalTrue: " + BidirectionalTrue);
         System.out.println("BidirectionalPruneTrue: " + BidirectionalPruneTrue);
         
+        // Executing the proper discovery algorithm based on the provided config file.
         long startTime, runTime = 0;
         try {
             startTime = System.currentTimeMillis();
@@ -208,6 +209,7 @@ public class MainClass {
         
     }
     
+    // Writing final aggregated statistics in the `stats/` directory
     public static void writeMainStatToFile(String textToWrite, boolean clearFileIfExists) {
         try {
             String filename = "stats/" + DatasetFileName + "-MainStats-" + ODAlgorithm.numberTuples + "-" + ODAlgorithm.numberAttributes + ".txt";
@@ -224,6 +226,7 @@ public class MainClass {
         }
     }
     
+    // Printing the runtime output in the standard output stream.
     public static void printTime() {
         Calendar now = Calendar.getInstance();
         int year = now.get(Calendar.YEAR);

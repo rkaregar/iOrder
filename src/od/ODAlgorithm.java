@@ -1,4 +1,5 @@
-// This is the backbone of the OD discovery process for traversing the lattice and pruning it.
+// This is the backbone of the OD discovery process for traversing the lattice, 
+// creating the dependency candidates, and pruning the search space.
 
 package od;
 
@@ -320,6 +321,7 @@ public class ODAlgorithm {
         return newAttributeValuesList;
     }
     
+    // Use the discovered dependencies to generate the next level of the lattice.
     private void generateNextLevel() {
         
         //OD
@@ -1200,6 +1202,8 @@ public class ODAlgorithm {
         }
     }
     
+    // Calculate the old measure of interestingness, corresponding to 
+    // E/E OCs and based on the sizes of partition groups.
     private long calculateInterestingnessScore(
             ObjectBigArrayBigList<LongBigArrayBigList> strippedPartition,
             OpenBitSet X) {
@@ -1312,6 +1316,7 @@ public class ODAlgorithm {
         return result;
     }
     
+    // Used for computing the new measure of interestingness.
     private long auxGetNumberOfPairOrders(Map<Long, Set<Long>> singleOrder) {
         long numOfPairs = 0;
         
@@ -1337,6 +1342,8 @@ public class ODAlgorithm {
         return numOfPairs;
     }
     
+    // Used for the alternative measure of interestingness, by finding the length of the 
+    // longest path in the order graph.
     private long auxLongestPathDAG(Map<Long, Set<Long>> singleOrder) {
         long startTime = System.nanoTime();
         

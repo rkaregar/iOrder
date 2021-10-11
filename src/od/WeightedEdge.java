@@ -1,4 +1,5 @@
-// This is the auxiliary class for weighetd edges.
+// This is the auxiliary class for weighetd edges and is used 
+// for applying heuristics when validating NP-hard I/I OC instances.
 
 package od;
 

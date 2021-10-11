@@ -1,4 +1,5 @@
 // This is the class for validating I/I OC candidates.
+// This class corresponds to Section 4 in the paper.
 
 package od;
 
@@ -103,8 +104,8 @@ public class SOCGeneralCase {
         return finalFlakes;
     }
     
-    
-    private boolean deriveChains() { //derives chains and returns true if all individual chains were acyclic, and false otherwise
+    //derives chains and returns true if all individual chains were acyclic, and false otherwise
+    private boolean deriveChains() {
         allBipGraphs = new ArrayList<>();
         allChains = new ArrayList<>();
         
@@ -194,7 +195,8 @@ public class SOCGeneralCase {
     }
     
     
-    // module1
+    // This is used to perform a preprocessing step and invalidate NP-hard instance as early as possible,
+    // by checking and merging pairs of grpahs extracted from different partition groups.
     private Map<Long, Set<WeightedEdge>> module1(ArrayList<List<Map<Long, Set<Long>>>> allChains, Map<Long, Long> mergeTrail) {
         System.out.println("Module 1 SIZE all chains === " + allChains.size());
         Map<Long, Set<WeightedEdge>> flakyMap = new HashMap<>();
@@ -317,8 +319,7 @@ public class SOCGeneralCase {
         }
     }
     
-    // module2
-    
+    // This adds an edge to the flakyMap, storing co-occurrances of tuple values together.
     private Map<Long, Set<WeightedEdge>> addUndirEdge(Map<Long, Set<WeightedEdge>> flakyMap, Long i, Long j, int weight) {
         if (!flakyMap.containsKey(i)) {
             flakyMap.put(i, new HashSet<>());
@@ -331,7 +332,7 @@ public class SOCGeneralCase {
         return flakyMap;
     }
     
-    // takes Map "flakyMap" and converts everything in it to what it was ultimately merged with based on "mergeTrail"
+    // Takes Map "flakyMap" and converts everything in it to what it was ultimately merged with based on "mergeTrail".
     private Map<Long, Set<WeightedEdge>> mapToUltimateDest(Map<Long, Long> mergeTrail, Map<Long, Set<WeightedEdge>> flakyMap) {
         Map<Long, Set<WeightedEdge>> ultimateMap = new HashMap<>();
         
@@ -402,7 +403,8 @@ public class SOCGeneralCase {
         return nodeWeights;
     }
     
-    // have not figured out yet what type variable this function should be returning
+    // These function corresponds to module 2 and includes the heuristics used when solving 
+    // an NP-hard instance.
     public ArrayList<List<Map<Long, Set<Long>>>> module2(Map<Long, Set<WeightedEdge>> adj, ArrayList<List<Map<Long, Set<Long>>>> allChains) {
         System.out.println("Module 2 SIZE looseConns === " + adj.size());
         System.out.println(adj);

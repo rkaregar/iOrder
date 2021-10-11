@@ -1,4 +1,5 @@
-// This is the auxiliary class for undirected graph.
+// This is the auxiliary class for undirected graph, used in the SAT 
+// reduction for storing co-occurrances of values.
 
 package od;
 

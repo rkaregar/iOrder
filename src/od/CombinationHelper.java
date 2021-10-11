@@ -1,4 +1,5 @@
-// This is a helper class for candidate verification.
+// This is a helper class used during the lattice traversal
+// for storing relevant candidates.
 
 package od;
 

@@ -1,4 +1,5 @@
 // This is the SAT reduction class.
+// This class corresponds to Section 5 in the paper.
 
 package od;
 
@@ -56,9 +57,9 @@ public class NewCPP2SATReducer {
     }
     
     
-    // return false if the reduction/solving had exceeded time limit
-    // the result (order/null) will be stored somewhere else
-    // the new idea, based on pairs of tuples instead of only chains
+    // Return false if the reduction/solving had exceeded time limit.
+    // The result (order/null) will be stored somewhere else.
+    // This is the new idea, based on pairs of tuples instead of only chains.
     public boolean newReduceAndSolve(int initialCardinalityCutoff, int connectedComponentMaxSizeLimit) {
         long startTime = System.nanoTime();
         findUniqueValues();
@@ -88,6 +89,8 @@ public class NewCPP2SATReducer {
         return false;
     }
     
+    // Find and all the unique values in LHS and RHS to 
+    // create the SAT variables based on.
     private void findUniqueValues() {
         values = new ArrayList<>();
         values.add(new HashSet<>());
@@ -108,6 +111,9 @@ public class NewCPP2SATReducer {
         maxCardinality = Math.max(values.get(0).size(), values.get(1).size());
     }
     
+    // We find the connected components in the bipartite graph
+    // to make the runtime faster, by only creating SAT variables corresponding
+    // to values that co-occur within the same connected component.
     public void computeConnectedComponents() {
         simpleUndirGraphs = new ArrayList<>(Arrays.asList(new SimpleGraph(), new SimpleGraph()));
         // add the edges from the (potentially merged) PGs (chains)
@@ -127,7 +133,7 @@ public class NewCPP2SATReducer {
         simpleUndirGraphs.get(1).computeConnectedComponents();
     }
     
-    // this one includes all (singleton/non-singleton) values within each PG
+    // This function includes all (singleton/non-singleton) values within each PG
     private void createIntraECVariables() {
         for (BipartiteGraph bg : allNewBipGraphs) {
             for (int i = 0; i < bg.getLeftNodes().size() - 1; i++) {
@@ -147,7 +153,7 @@ public class NewCPP2SATReducer {
         }
     }
     
-    // this one includes only non-singleton elements across multiple PGs
+    // This function includes only non-singleton elements across multiple PGs
     private void createInterPGVariables() {
         for (int side = 0; side < 2; side++) {
             for (List<Long> cc :
@@ -163,6 +169,7 @@ public class NewCPP2SATReducer {
         }
     }
     
+    // Create the SAT variables based on the unique values on the LHS and RHS
     private void createTwoVariablesFromValues(int side, long first, long second) {
         SATVariable satVar = new SATVariable(first, second), satVarRev = new SATVariable(second, first);
         if ((!satVariable2Numeric.get(side).containsKey(satVar)) && (!satVariable2Numeric.get(side).containsKey(satVarRev))) {
@@ -181,6 +188,8 @@ public class NewCPP2SATReducer {
         
     }
     
+    // Store which tuple values have co-occurred within the same bipartite graph.
+    // This is used to find the strongest derivable order after solving the SAT instance.
     private void handleStoringCoOccurrencesOfTuples() {
         for (int i = 0; i < allNewBipGraphs.size(); i++) {
             BipartiteGraph bg = allNewBipGraphs.get(i);
@@ -204,6 +213,7 @@ public class NewCPP2SATReducer {
         }
     }
     
+    // Store a single co-occurrance of values within the same bipartite graph.
     private void storeTupleCoOccurrence(long t1, long t2, int side, int pgNumber) {
         TuplePair p1 = new TuplePair(t1, t2), p2 = new TuplePair(t2, t1);
         Map<TuplePair, Set<Integer>> currSideData = haveThisPairCoOccurred.get(side);
@@ -215,6 +225,8 @@ public class NewCPP2SATReducer {
         currSideData.get(p2).add(pgNumber);
     }
     
+    // Create SAT clauses corresponding to tuple values that have 
+    // co-occurred within the same partition group.
     public void addConnectedPairOfTuplesClauses() {
         for (BipartiteGraph bg : allNewBipGraphs) {
             for (List<BipartiteNode> connectedComponent : bg.getConnectedComponents()) {
@@ -254,7 +266,7 @@ public class NewCPP2SATReducer {
         }
     }
     
-    // for each two connected component, first check if they have a pair that exist in at least one other PG 
+    // For each two connected component, first check if they have a pair that exist in at least one other partition group.
     public void addNotConnectedPairOfTuplesClauses() {
         for (BipartiteGraph bg : allNewBipGraphs) {
             for (int i = 0; i < bg.getConnectedComponents().size(); i++) {
@@ -331,6 +343,8 @@ public class NewCPP2SATReducer {
         }
     }
     
+    // These clauses are only added if one of the conditions for being in the strongest derivable order
+    // hold between a pair of tuple values.
     public void addNewRestrictivePairSwapClauses() {
         for (Graph bipGraph :
                 allBipGraphs) {
@@ -369,6 +383,7 @@ public class NewCPP2SATReducer {
         }
     }
     
+    // Create clauses corresponding to the no swap condition.
     public void addChainClauses() {
         for (List<Map<Long, Set<Long>>> doubleChain : allChains) {
             for (int side = 0; side < 2; side++) {
@@ -396,6 +411,7 @@ public class NewCPP2SATReducer {
         }
     }
     
+    // Create clauses corresponding to the transitivity condition.
     public void addTransitivityClauses() {
         for (int side = 0; side < 2; side++) {
             for (List<Long> cc :
@@ -422,6 +438,7 @@ public class NewCPP2SATReducer {
         }
     }
     
+    // Extract the strongest derivable order based on the output of the SAT solver.
     public ArrayList<List<Map<Long, Set<Long>>>> getFinalOrders(int[] assignments) {
         // this is the only single chain for both sides, then we'll just append it to another list and return it
         List<Map<Long, Set<Long>>> doubleChain = new ArrayList<>(Arrays.asList(new HashMap<>(), new HashMap<>()));
@@ -455,7 +472,7 @@ public class NewCPP2SATReducer {
         return new ArrayList<>(Collections.singletonList(doubleChain));
     }
     
-    // return false if it exceeded time limit
+    // Solve the SAT instance and return false if it exceeded time limit.
     public boolean solveSAT() {
         ISolver solver = SolverFactory.newDefault();
         for (int[] clause :
@@ -483,6 +500,8 @@ public class NewCPP2SATReducer {
 }
 
 
+// The SAT variable class, storing the two tuple values corresponding 
+// to that variable.
 class SATVariable {
     private final long first, second;
     

@@ -4,6 +4,7 @@ package od;
 
 import java.util.*;
 
+// Used to stor co-occurrances of pairs of tuples together.
 class TuplePair {
     public long a, b;
     
@@ -27,6 +28,8 @@ class TuplePair {
     }
 }
 
+// Graph node designated for bipartite graphs, storing 
+// the side to which the node belongs.
 class BipartiteNode {
     public long id;
     public char side;  // either "l" or "r"
@@ -55,6 +58,7 @@ class BipartiteNode {
         return id + "" + side;
     }
 }
+
 // this class is for improved storage of bipartite graph and computing connected components in it
 class BipartiteGraph {
     private final List<BipartiteNode> leftNodes, rightNodes;

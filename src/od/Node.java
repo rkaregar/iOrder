@@ -1,4 +1,5 @@
-// This is the auxiliary class for nodes.
+// This is the auxiliary class for nodes, used when constructing 
+// graphs in the E/I and I/I cases.
 
 package od;
 import java.util.ArrayList;

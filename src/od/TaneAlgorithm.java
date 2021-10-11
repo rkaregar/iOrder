@@ -1,4 +1,5 @@
-// This is a helper class for validating FD candidates.
+// This is a helper class for validating FD candidates and determining 
+// the candidates that are OD rather than OC.
 
 package od;
 

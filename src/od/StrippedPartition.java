@@ -1,4 +1,4 @@
-// This is the helper class for discovering FDs in the stripped partitions.
+// This is the helper class for discovering FDs used the stripped partitions.
 
 package od;
 

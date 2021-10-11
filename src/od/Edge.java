@@ -1,4 +1,4 @@
-// This is the auxiliary class for edge.
+// This is the auxiliary class for edge used in the graph classes.
 
 package od;
 

@@ -1,4 +1,5 @@
 // This is the class for validating E/I OCs.
+// This class corresponds to Section 3 in the paper.
 
 package od;
 
@@ -46,6 +47,7 @@ public class SOCOneSideSyntactic {
         }
     }
     
+    // This is used for the OD case.
     private List<Map<Long, Set<Long>>> executeNoFD() {
         boolean valid = deriveChainsNoFD();
         if (!valid) {
@@ -78,7 +80,7 @@ public class SOCOneSideSyntactic {
         }
     }
     
-    
+    // This is used for the OC case.
     private List<Map<Long, Set<Long>>> executeWithFD() {
         for (ObjectBigArrayBigList<LongBigArrayBigList> sorted_TAU_LHS : TAU_XA) {// iterate over each eq. class in X
             ArrayList<Long> listRHS = getListRHSwithFD(sorted_TAU_LHS);
@@ -112,6 +114,7 @@ public class SOCOneSideSyntactic {
         return chain;
     }
     
+    // Extract the corresponding RHS values for an OD candidate.
     private ArrayList<Long> getListRHSwithFD(ObjectBigArrayBigList<LongBigArrayBigList> sorted_TAU_LHS) {
         ArrayList<Long> listRHS = new ArrayList<>();
         for (LongBigArrayBigList XA_eqC : sorted_TAU_LHS) {
@@ -139,7 +142,8 @@ public class SOCOneSideSyntactic {
         return chain;
     }
     
-    private boolean deriveChainsNoFD() { //derives chains and returns true if all individual chains were acyclic, and false otherwise
+    //derives chains and returns true if all individual chains were acyclic, and false otherwise
+    private boolean deriveChainsNoFD() {
         allChainsNoFD = new ArrayList<>();
         for (int i = 0; i < TAU_XA.size64(); i++) { // or TAU_XB -- iterating over eq. classes on X
             ObjectBigArrayBigList<LongBigArrayBigList> sorted_TAU_LHS = TAU_XA.get(i);
